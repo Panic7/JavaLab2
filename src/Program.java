@@ -53,10 +53,13 @@ public class Program {
         System.out.println(sbd);
         String[] words = sbd.toString().split(" ");
         int maxLen = words[0].length();
+        String maxWord = words[0];
         for (String word : words)
         {
-            if(maxLen < word.length()) maxLen = word.length();
+            if(maxLen < word.length()) {maxLen = word.length(); maxWord = word;}
         }
+
+        System.out.println("Найдовше слово: " + maxWord);
         System.out.println("Максимальна довжина слова з введеного тексту: " + maxLen);
     }
 
@@ -79,17 +82,22 @@ public class Program {
     public static void task3()
     {
         Integer maxLen = null;
+        String maxWords = null;
+
         try(BufferedReader br = new BufferedReader(new FileReader("input.txt")))
         {
             String text = br.readLine();
             System.out.println("Зчитаний рядок з файла: " + text);
             String[] words = text.split("\\.");
             maxLen = words[0].length();
+            maxWords = words[0];
             for (String word : words)
             {
-                if(maxLen < word.length()) maxLen = word.length();
+                if(maxLen < word.length()) {maxLen = word.length(); maxWords = word;}
             }
             System.out.println("Максимальна довжина речення з введеного тексту: " + maxLen);
+            System.out.println("Найдовше речення: " + maxWords);
+
         }
         catch (IOException e)
         {
@@ -101,6 +109,7 @@ public class Program {
             else System.out.println("Не вдалося створити файл");
             FileWriter fw = new FileWriter(file);
             fw.write("Максимальна довжина слова з введеного тексту: " + maxLen);
+            fw.write("Найдовше речення: " + maxWords);
             fw.close();
         }
         catch (IOException e)
